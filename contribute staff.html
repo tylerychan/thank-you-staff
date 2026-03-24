@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Add Your Card — Obama Foundation Staff</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+
+<!-- ═══════════════ CONFIG — edit before uploading ═══════════════ -->
+<script>
+const CONFIG = {
+  GITHUB_USER:    "tylerychan",
+  GITHUB_REPO:    "thank-you-cards-staff",
+  GITHUB_TOKEN:   "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",
+  RECIPIENT_NAME: "Obama Foundation Staff",
+  BOARD_LABEL:    "Obama Foundation Staff",
+  TENOR_KEY:      "",
+};
+</script>
+<!-- ══════════════════════════════════════════════════════════════ -->
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cobalt:    #0047AB;
+  --cobalt-d:  #003080;
+  --cobalt-l:  #1a5fc4;
+  --cobalt-xl: #e8eef8;
+  --cobalt-xx: #f0f4fb;
+  --gold:      #C9A84C;
+  --gold-l:    #e8c96a;
+  --ink:       #111827;
+  --ink2:      #374151;
+  --muted:     #6B7280;
+  --paper:     #f9fafb;
+  --white:     #ffffff;
+  --border:    #E5E7EB;
+  --border2:   #D1D5DB;
+  --radius:    14px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow:    0 1px 3px rgba(0,0,0,.07), 0 8px 24px rgba(0,71,171,.06);
+  --shadow-h:  0 4px 12px rgba(0,0,0,.09), 0 20px 48px rgba(0,71,171,.12);
+}
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Topbar ── */
+.topbar {
+  position: sticky; top: 0; z-index: 200;
+  background: var(--cobalt);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; height: 56px;
+  box-shadow: 0 2px 12px rgba(0,48,128,.25);
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand-icon {
+  width: 30px; height: 30px; border-radius: 8px;
+  background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.2);
+  display: flex; align-items: center; justify-content: center; font-size: 15px;
+}
+.brand-name { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 700; letter-spacing: -.2px; color: #fff; }
+.brand-label {
+  font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  background: rgba(201,168,76,.2); border: 1px solid rgba(201,168,76,.35);
+  color: var(--gold-l); padding: 2px 10px; border-radius: 20px;
+}
+.top-badge {
+  background: rgba(201,168,76,.2); border: 1px solid rgba(201,168,76,.4);
+  color: var(--gold-l); font-size: 11px; font-weight: 600;
+  padding: 3px 12px; border-radius: 20px; display: none; letter-spacing: .3px;
+}
+
+/* ── Page hero ── */
+.page-hero {
+  background: linear-gradient(to bottom, var(--cobalt-xx), var(--white));
+  border-bottom: 1px solid var(--border);
+  padding: 36px 28px 30px; text-align: center;
+}
+.page-hero h1 {
+  font-family: 'Fraunces', serif; font-size: clamp(22px, 4vw, 36px);
+  font-weight: 700; letter-spacing: -.5px; color: var(--ink); margin-bottom: 8px;
+}
+.page-hero h1 em { font-style: italic; color: var(--cobalt); }
+.page-hero p { color: var(--muted); font-size: 14px; }
+
+/* ── Main layout ── */
+.layout {
+  display: grid; grid-template-columns: 310px 1fr;
+  gap: 28px; max-width: 1200px; margin: 0 auto;
+  padding: 28px 20px 80px; align-items: start;
+}
+@media (max-width: 800px) { .layout { grid-template-columns: 1fr; } }
+
+/* ── Composer ── */
+.composer {
+  position: sticky; top: 68px; background: var(--white);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 24px; box-shadow: var(--shadow);
+}
+.composer-title {
+  font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700;
+  letter-spacing: -.2px; margin-bottom: 18px;
+  display: flex; align-items: center; gap: 8px; color: var(--ink);
+  padding-bottom: 14px; border-bottom: 1px solid var(--border);
+}
+.field { margin-bottom: 15px; }
+.field label {
+  display: block; font-size: 10.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.2px; color: var(--muted); margin-bottom: 6px;
+}
+.field input, .field textarea {
+  width: 100%; padding: 9px 12px; border-radius: 9px;
+  border: 1.5px solid var(--border2); font-family: 'DM Sans', sans-serif;
+  font-size: 13px; background: var(--paper); color: var(--ink);
+  transition: border-color .18s, background .18s; resize: none;
+}
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--cobalt); background: var(--white); }
+.field input::placeholder, .field textarea::placeholder { color: var(--muted); }
+
+/* Swatches */
+.swatches { display: flex; gap: 7px; flex-wrap: wrap; }
+.swatch {
+  width: 26px; height: 26px; border-radius: 7px;
+  border: 2.5px solid transparent; cursor: pointer;
+  transition: transform .15s, border-color .15s;
+}
+.swatch:hover { transform: scale(1.18); }
+.swatch.sel { border-color: var(--ink) !important; transform: scale(1.12); }
+
+/* Emoji */
+.emoji-row { display: flex; gap: 4px; flex-wrap: wrap; }
+.emo-btn {
+  font-size: 18px; border-radius: 7px; padding: 3px 5px;
+  border: 1.5px solid transparent; cursor: pointer;
+  transition: background .12s, border-color .12s;
+}
+.emo-btn:hover { background: var(--paper); }
+.emo-btn.sel { border-color: var(--cobalt-xl); background: var(--cobalt-xx); }
+
+/* GIF */
+.gif-row { position: relative; }
+.gif-row input { padding-right: 72px; }
+.gif-go {
+  position: absolute; right: 7px; top: 50%; transform: translateY(-50%);
+  background: var(--cobalt); color: #fff; border: none;
+  border-radius: 6px; padding: 4px 11px; font-size: 11px;
+  font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif;
+  transition: background .15s;
+}
+.gif-go:hover { background: var(--cobalt-d); }
+.gif-grid {
+  display: none; grid-template-columns: 1fr 1fr;
+  gap: 5px; margin-top: 7px; max-height: 200px; overflow-y: auto; border-radius: 9px;
+}
+.gif-grid img {
+  width: 100%; height: 80px; object-fit: cover;
+  border-radius: 6px; cursor: pointer;
+  border: 2px solid transparent; transition: border-color .14s;
+}
+.gif-grid img:hover, .gif-grid img.picked { border-color: var(--cobalt); }
+.gif-preview { position: relative; margin-top: 7px; display: none; }
+.gif-preview img { width: 100%; border-radius: 9px; max-height: 130px; object-fit: cover; display: block; }
+.gif-x {
+  position: absolute; top: 5px; right: 5px;
+  background: rgba(0,0,0,.55); color: #fff; border: none;
+  border-radius: 50%; width: 22px; height: 22px; font-size: 12px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.gif-x:hover { background: rgba(0,0,0,.75); }
+
+/* Preview */
+.preview-section { margin-bottom: 18px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+.preview-label {
+  font-size: 10.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.2px; color: var(--muted); margin-bottom: 10px;
+}
+
+/* Post button */
+.post-btn {
+  width: 100%; padding: 13px; border-radius: 10px; border: none;
+  background: var(--cobalt); color: #fff; font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 700; cursor: pointer;
+  transition: background .15s, transform .1s; margin-top: 6px; letter-spacing: .2px;
+}
+.post-btn:hover { background: var(--cobalt-d); }
+.post-btn:active { transform: scale(.98); }
+.post-btn:disabled { opacity: .35; cursor: default; }
+.post-notice { font-size: 12px; text-align: center; margin-top: 8px; min-height: 16px; }
+.post-notice.ok  { color: #15803d; font-weight: 600; }
+.post-notice.bad { color: #dc2626; }
+
+/* ── Board panel ── */
+.board-panel { min-width: 0; }
+.board-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--border);
+}
+.board-head h2 { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 700; letter-spacing: -.3px; }
+.board-count { font-size: 12px; color: var(--muted); }
+
+/* Masonry */
+.masonry { columns: 2; column-gap: 16px; }
+@media (max-width: 600px) { .masonry { columns: 1; } }
+
+/* ── Card ── */
+.card {
+  break-inside: avoid; background: var(--white);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 18px 18px 14px; margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0,0,0,.04), 0 10px 28px rgba(0,71,171,.07);
+  transition: box-shadow .25s, transform .2s;
+  animation: cardIn .4s cubic-bezier(.22,1,.36,1) both;
+  position: relative; overflow: hidden;
+}
+.card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--card-accent, var(--cobalt));
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.card::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(135deg, var(--card-tint, var(--cobalt-xx)) 0%, transparent 50%);
+  opacity: .55; border-radius: var(--radius);
+}
+.card > * { position: relative; z-index: 1; }
+
+/* Preview card */
+.preview-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 18px 18px 14px; position: relative; overflow: hidden; transition: all .2s;
+}
+.preview-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--card-accent, var(--cobalt));
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.preview-card::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(135deg, var(--card-tint, var(--cobalt-xx)) 0%, transparent 50%);
+  opacity: .55; border-radius: var(--radius);
+}
+.preview-card > * { position: relative; z-index: 1; }
+.card:hover { box-shadow: var(--shadow-h); transform: translateY(-3px); }
+@keyframes cardIn { from{opacity:0;transform:translateY(14px) scale(.98)} to{opacity:1;transform:translateY(0) scale(1)} }
+
+.card-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; color: #fff; flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,.16);
+}
+.card-meta { min-width: 0; }
+.card-from { font-size: 13px; font-weight: 700; }
+.card-time { font-size: 11px; color: var(--muted); }
+.card-emoji { font-size: 28px; margin-bottom: 8px; line-height: 1; }
+.card-body { font-size: 13.5px; line-height: 1.72; color: var(--ink2); white-space: pre-wrap; word-break: break-word; }
+.card-body a { color: var(--cobalt); text-decoration: underline; word-break: break-all; }
+.card-body.empty-preview { font-style: italic; color: var(--muted); font-size: 13px; }
+.card-gif { margin-top: 11px; border-radius: 9px; overflow: hidden; }
+.card-gif img { width: 100%; display: block; max-height: 200px; object-fit: cover; }
+
+/* Reactions */
+.reactions { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; margin-top: 12px; position: relative; }
+.reaction {
+  display: inline-flex; align-items: center; gap: 3px;
+  background: var(--paper); border: 1.5px solid var(--border2);
+  border-radius: 20px; padding: 3px 9px; font-size: 12px;
+  cursor: pointer; transition: all .14s; user-select: none;
+}
+.reaction:hover { border-color: var(--cobalt); background: var(--cobalt-xx); }
+.reaction.mine { border-color: var(--cobalt); background: var(--cobalt-xx); font-weight: 600; }
+.reaction .rcount { font-size: 11px; color: var(--muted); }
+.reaction.pop { animation: reactionPop .35s cubic-bezier(.34,1.56,.64,1) both; }
+@keyframes reactionPop { 0%{transform:scale(1)} 40%{transform:scale(1.35)} 70%{transform:scale(.9)} 100%{transform:scale(1)} }
+.add-react {
+  font-size: 14px; padding: 3px 8px; border-radius: 20px;
+  border: 1.5px dashed var(--border2); color: var(--muted);
+  cursor: pointer; transition: all .14s; background: transparent;
+  font-family: 'DM Sans', sans-serif; line-height: 1.6;
+}
+.add-react:hover { border-color: var(--cobalt); color: var(--cobalt); background: var(--cobalt-xx); }
+.rpop {
+  position: absolute; bottom: calc(100% + 6px); left: 0;
+  background: var(--white); border: 1px solid var(--border2);
+  border-radius: 12px; padding: 8px 10px;
+  display: flex; gap: 4px; box-shadow: 0 8px 28px rgba(0,0,0,.14);
+  z-index: 100; animation: cardIn .15s ease;
+}
+.rpop span { font-size: 19px; cursor: pointer; border-radius: 7px; padding: 3px 5px; transition: background .12s; }
+.rpop span:hover { background: var(--cobalt-xx); }
+
+/* Skeleton */
+.skel {
+  background: linear-gradient(90deg,#eef1f6 25%,#e4e8ef 50%,#eef1f6 75%);
+  background-size: 200% 100%; animation: shimmer 1.5s infinite;
+  border-radius: var(--radius); margin-bottom: 16px;
+}
+@keyframes shimmer { to{background-position:-200% 0} }
+.empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
+.empty-state .big { font-size: 50px; margin-bottom: 12px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="brand-icon">💌</div>
+    <span class="brand-name">Thank You Board</span>
+    <span class="brand-label" id="top-label"></span>
+  </div>
+  <span class="top-badge" id="top-badge"></span>
+</div>
+
+<div class="page-hero">
+  <h1>Leave a card for <em id="hero-name"></em></h1>
+  <p id="hero-sub">Write your message, pick a color, add a GIF, and see what everyone else has written.</p>
+</div>
+
+<div class="layout">
+  <!-- Composer -->
+  <aside class="composer">
+    <div class="composer-title">✍️ Your card</div>
+
+    <!-- Live Preview -->
+    <div class="preview-section">
+      <div class="preview-label">Preview</div>
+      <div class="preview-card" id="preview-card" style="--card-accent:#0047AB;--card-tint:#f0f4fb">
+        <div class="card-head">
+          <div class="avatar" id="pv-avatar" style="background:#0047AB">?</div>
+          <div>
+            <div class="card-from" id="pv-name">Your name</div>
+            <div class="card-time">just now</div>
+          </div>
+        </div>
+        <div class="card-emoji" id="pv-emoji">🙏</div>
+        <div class="card-body empty-preview" id="pv-body">Your message will appear here…</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Your name</label>
+      <input id="f-name" type="text" placeholder="How you'd like to sign it" oninput="updatePreview()"/>
+    </div>
+    <div class="field">
+      <label>Card color</label>
+      <div class="swatches" id="swatches"></div>
+    </div>
+    <div class="field">
+      <label>Emoji</label>
+      <div class="emoji-row" id="emoji-row"></div>
+    </div>
+    <div class="field">
+      <label>Message</label>
+      <textarea id="f-msg" rows="5" placeholder="Write your thank you message…&#10;&#10;Paste links — they'll be clickable." oninput="updatePreview()"></textarea>
+    </div>
+    <div class="field">
+      <label>GIF (optional)</label>
+      <div class="gif-row">
+        <input id="gif-q" type="text" placeholder="Search Tenor GIFs…" onkeydown="if(event.key==='Enter')searchGifs()"/>
+        <button class="gif-go" onclick="searchGifs()">Search</button>
+      </div>
+      <div class="gif-grid" id="gif-grid"></div>
+      <div class="gif-preview" id="gif-preview">
+        <img id="gif-img" src="" alt="Selected GIF"/>
+        <button class="gif-x" onclick="clearGif()">✕</button>
+      </div>
+    </div>
+    <button class="post-btn" id="post-btn" onclick="postCard()">Post My Card →</button>
+    <div class="post-notice" id="post-notice"></div>
+  </aside>
+
+  <!-- Board -->
+  <section class="board-panel">
+    <div class="board-head">
+      <h2>💌 All Cards</h2>
+      <span class="board-count" id="board-count"></span>
+    </div>
+    <div id="board">
+      <div class="masonry">
+        <div class="skel" style="height:170px"></div>
+        <div class="skel" style="height:130px"></div>
+        <div class="skel" style="height:200px"></div>
+        <div class="skel" style="height:150px"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+const ACCENTS = [
+  {hex:"#0047AB",tint:"#f0f4fb",avBg:"#0047AB"},
+  {hex:"#1a5fc4",tint:"#eef3fc",avBg:"#1a5fc4"},
+  {hex:"#C9A84C",tint:"#fdf9ee",avBg:"#b8902a"},
+  {hex:"#16a34a",tint:"#f0fdf4",avBg:"#16a34a"},
+  {hex:"#7c3aed",tint:"#faf5ff",avBg:"#7c3aed"},
+  {hex:"#db2777",tint:"#fdf2f8",avBg:"#db2777"},
+  {hex:"#0891b2",tint:"#ecfeff",avBg:"#0891b2"},
+  {hex:"#d97706",tint:"#fffbeb",avBg:"#d97706"},
+];
+const EMOJIS       = ["🙏","💙","🌟","🎉","🌸","✨","🔥","💫","🤗","🥹","💯","🌈","🫶","👏"];
+const REACT_EMOJIS = ["❤️","🙌","🥹","🔥","💯","😂","👏","🫶"];
+
+let accent = ACCENTS[0], emoji = "🙏", gifUrl = null;
+let cards = [], myReacted = {};
+
+document.getElementById("hero-name").textContent  = CONFIG.RECIPIENT_NAME;
+document.getElementById("top-label").textContent  = CONFIG.BOARD_LABEL;
+
+const esc      = s => String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const linkify  = t => t.replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
+const initials = n => n.trim().split(/\s+/).map(w=>w[0]).join("").toUpperCase().slice(0,2)||"?";
+const timeAgo  = ts => { const d=(Date.now()-ts)/1000; if(d<60) return "just now"; if(d<3600) return `${Math.floor(d/60)}m ago`; if(d<86400) return `${Math.floor(d/3600)}h ago`; return `${Math.floor(d/86400)}d ago`; };
+
+/* ── Init ── */
+window.addEventListener("DOMContentLoaded", () => {
+  initComposer();
+  loadBoard();
+});
+
+function initComposer() {
+  const sw = document.getElementById("swatches");
+  ACCENTS.forEach((a,i) => {
+    const el = document.createElement("div");
+    el.className = "swatch" + (i===0?" sel":"");
+    el.style.background = a.hex;
+    el.onclick = () => { accent=a; sw.querySelectorAll(".swatch").forEach(x=>x.classList.remove("sel")); el.classList.add("sel"); updatePreview(); };
+    sw.appendChild(el);
+  });
+  const er = document.getElementById("emoji-row");
+  EMOJIS.forEach((e,i) => {
+    const el = document.createElement("span");
+    el.className = "emo-btn" + (i===0?" sel":"");
+    el.textContent = e;
+    el.onclick = () => { emoji=e; er.querySelectorAll(".emo-btn").forEach(x=>x.classList.remove("sel")); el.classList.add("sel"); updatePreview(); };
+    er.appendChild(el);
+  });
+}
+
+/* ── Live preview ── */
+function updatePreview() {
+  const name = document.getElementById("f-name").value.trim();
+  const msg  = document.getElementById("f-msg").value.trim();
+  const card = document.getElementById("preview-card");
+  card.style.setProperty("--card-accent", accent.hex);
+  card.style.setProperty("--card-tint",   accent.tint);
+  document.getElementById("pv-avatar").style.background = accent.avBg;
+  document.getElementById("pv-avatar").textContent = name ? initials(name) : "?";
+  document.getElementById("pv-name").textContent   = name || "Your name";
+  document.getElementById("pv-emoji").textContent  = emoji;
+  const pvBody = document.getElementById("pv-body");
+  if (msg) { pvBody.classList.remove("empty-preview"); pvBody.innerHTML = linkify(esc(msg)); }
+  else      { pvBody.classList.add("empty-preview");   pvBody.textContent = "Your message will appear here…"; }
+  let pvGif = card.querySelector(".pv-gif");
+  if (gifUrl) {
+    if (!pvGif) { pvGif = document.createElement("div"); pvGif.className="card-gif pv-gif"; pvGif.innerHTML=`<img src="" alt="GIF"/>`; card.appendChild(pvGif); }
+    pvGif.querySelector("img").src = document.getElementById("gif-img").src;
+  } else if (pvGif) { pvGif.remove(); }
+}
+
+/* ── GitHub helpers ── */
+const rawUrl = () => `https://raw.githubusercontent.com/${CONFIG.GITHUB_USER}/${CONFIG.GITHUB_REPO}/main/cards.json?_=${Date.now()}`;
+const apiUrl = `https://api.github.com/repos/${CONFIG.GITHUB_USER}/${CONFIG.GITHUB_REPO}/contents/cards.json`;
+const authHdr = () => ({ "Authorization":`token ${CONFIG.GITHUB_TOKEN}`, "Content-Type":"application/json" });
+
+async function fetchCards() {
+  try { const r=await fetch(rawUrl()); return r.status===404?[]:await r.json(); } catch { return []; }
+}
+async function saveCards(data) {
+  let sha=null;
+  try { const m=await fetch(apiUrl,{headers:authHdr()}); if(m.ok) sha=(await m.json()).sha; } catch {}
+  const body={message:"Update cards",content:btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))))};
+  if(sha) body.sha=sha;
+  const r=await fetch(apiUrl,{method:"PUT",headers:authHdr(),body:JSON.stringify(body)});
+  if(!r.ok) throw new Error(await r.text());
+}
+
+async function loadBoard() {
+  cards = await fetchCards();
+  cards.sort((a,b)=>b.ts-a.ts);
+  renderBoard(); updateCount();
+}
+
+function updateCount() {
+  const n=cards.length;
+  document.getElementById("board-count").textContent = n===0?"No cards yet — be the first!":`${n} card${n===1?"":"s"}`;
+  if(n>0){ const b=document.getElementById("top-badge"); b.textContent=`${n} card${n===1?"":"s"} so far`; b.style.display="inline-block"; }
+}
+
+function cardHtml(c,idx) {
+  const a=ACCENTS[c.accentIdx]||ACCENTS[0];
+  const rxEntries=Object.entries(c.reactions||{}).filter(([,v])=>v>0);
+  const rxHtml=rxEntries.map(([em,v])=>{const mine=myReacted[c.id+em]?" mine":"";return`<span class="reaction${mine}" data-react="${esc(em)}">${em}<span class="rcount">${v}</span></span>`;}).join("");
+  return `<div class="card" id="c-${c.id}" style="--card-accent:${a.hex};--card-tint:${a.tint};animation-delay:${idx*0.04}s">
+  <div class="card-head"><div class="avatar" style="background:${a.avBg}">${initials(c.from)}</div><div class="card-meta"><div class="card-from">${esc(c.from)}</div><div class="card-time">${timeAgo(c.ts)}</div></div></div>
+  ${c.emoji?`<div class="card-emoji">${c.emoji}</div>`:""}
+  <div class="card-body">${linkify(esc(c.msg))}</div>
+  ${c.gif?`<div class="card-gif"><img src="${esc(c.gif)}" alt="GIF" loading="lazy"/></div>`:""}
+  <div class="reactions">${rxHtml}<button class="add-react" data-addreact>＋</button></div>
+</div>`;
+}
+
+function renderBoard() {
+  const el=document.getElementById("board");
+  if(!cards.length){ el.innerHTML=`<div class="empty-state"><div class="big">💌</div><p>No cards yet — post the first!</p></div>`; return; }
+  el.innerHTML=`<div class="masonry">${cards.map((c,i)=>cardHtml(c,i)).join("")}</div>`;
+  cards.forEach(c=>{
+    const cel=document.getElementById(`c-${c.id}`); if(!cel) return;
+    cel.querySelectorAll("[data-react]").forEach(btn=>btn.onclick=()=>doReact(c.id,btn.dataset.react,btn));
+    const ab=cel.querySelector("[data-addreact]");
+    if(ab) ab.onclick=e=>{e.stopPropagation();showReactPicker(c.id,ab);};
+  });
+}
+
+async function postCard() {
+  const from=document.getElementById("f-name").value.trim();
+  const msg=document.getElementById("f-msg").value.trim();
+  const notice=document.getElementById("post-notice");
+  if(!from||!msg){ notice.className="post-notice bad"; notice.textContent="⚠ Name and message are required."; setTimeout(()=>notice.textContent="",3000); return; }
+  const btn=document.getElementById("post-btn");
+  btn.disabled=true; btn.textContent="Posting…";
+  const card={id:`c${Date.now()}${Math.random().toString(36).slice(2,5)}`,from,msg,emoji,gif:gifUrl,accentIdx:ACCENTS.indexOf(accent),reactions:{},ts:Date.now()};
+  try {
+    const latest=await fetchCards(); latest.unshift(card); await saveCards(latest);
+    cards=latest; renderBoard(); updateCount();
+    notice.className="post-notice ok"; notice.textContent="✓ Your card is on the board!";
+    document.getElementById("f-name").value="";
+    document.getElementById("f-msg").value="";
+    clearGif(); emoji="🙏";
+    document.getElementById("emoji-row").querySelectorAll(".emo-btn").forEach((b,i)=>b.classList.toggle("sel",i===0));
+    updatePreview(); setTimeout(()=>notice.textContent="",5000);
+  } catch(e) { notice.className="post-notice bad"; notice.textContent="Error saving — check your CONFIG settings."; console.error(e); }
+  btn.disabled=false; btn.textContent="Post My Card →";
+}
+
+async function doReact(cardId,em,btn) {
+  const card=cards.find(c=>c.id===cardId); if(!card) return;
+  if(!card.reactions) card.reactions={};
+  const key=cardId+em;
+  if(myReacted[key]){ card.reactions[em]=Math.max(0,(card.reactions[em]||1)-1); if(!card.reactions[em]) delete card.reactions[em]; delete myReacted[key]; }
+  else { card.reactions[em]=(card.reactions[em]||0)+1; myReacted[key]=true; }
+  renderBoard();
+  const cel=document.getElementById(`c-${cardId}`);
+  if(cel){
+    cel.querySelectorAll("[data-react]").forEach(b=>b.onclick=()=>doReact(cardId,b.dataset.react,b));
+    const ab=cel.querySelector("[data-addreact]"); if(ab) ab.onclick=e=>{e.stopPropagation();showReactPicker(cardId,ab);};
+    const target=cel.querySelector(`[data-react="${em}"]`);
+    if(target){target.classList.remove("pop");void target.offsetWidth;target.classList.add("pop");}
+  }
+  try{await saveCards(cards);}catch{}
+}
+
+function showReactPicker(cardId,btn){
+  document.querySelectorAll(".rpop").forEach(p=>p.remove());
+  const pop=document.createElement("div"); pop.className="rpop";
+  REACT_EMOJIS.forEach(em=>{const s=document.createElement("span");s.textContent=em;s.onclick=()=>{doReact(cardId,em);pop.remove();};pop.appendChild(s);});
+  btn.parentElement.appendChild(pop);
+  setTimeout(()=>document.addEventListener("click",()=>pop.remove(),{once:true}),10);
+}
+
+async function searchGifs(){
+  const q=document.getElementById("gif-q").value.trim(); if(!q) return;
+  const grid=document.getElementById("gif-grid"); grid.style.display="grid";
+  grid.innerHTML=`<div style="grid-column:1/-1;padding:8px;color:var(--muted);font-size:12px">Searching…</div>`;
+  if(!CONFIG.TENOR_KEY||CONFIG.TENOR_KEY==="YOUR_TENOR_API_KEY"){ grid.innerHTML=`<div style="grid-column:1/-1;padding:8px;color:var(--muted);font-size:12px">Set TENOR_KEY in CONFIG to enable GIF search.</div>`; return; }
+  try{
+    const res=await fetch(`https://tenor.googleapis.com/v2/search?q=${encodeURIComponent(q)}&key=${CONFIG.TENOR_KEY}&limit=8&media_filter=gif`);
+    const data=await res.json(); grid.innerHTML="";
+    if(!data.results?.length){grid.innerHTML=`<div style="grid-column:1/-1;padding:8px;color:var(--muted);font-size:12px">No results.</div>`;return;}
+    data.results.forEach(r=>{
+      const url=r.media_formats?.tinygif?.url||r.media_formats?.gif?.url;
+      const full=r.media_formats?.gif?.url||url; if(!url) return;
+      const img=document.createElement("img"); img.src=url; img.loading="lazy";
+      img.onclick=()=>{grid.querySelectorAll("img").forEach(i=>i.classList.remove("picked"));img.classList.add("picked");gifUrl=full;document.getElementById("gif-img").src=url;document.getElementById("gif-preview").style.display="block";updatePreview();};
+      grid.appendChild(img);
+    });
+  }catch{grid.innerHTML=`<div style="grid-column:1/-1;padding:8px;color:#dc2626;font-size:12px">GIF search failed.</div>`;}
+}
+
+function clearGif(){
+  gifUrl=null; document.getElementById("gif-preview").style.display="none";
+  document.getElementById("gif-img").src=""; document.getElementById("gif-grid").style.display="none";
+  document.getElementById("gif-grid").innerHTML=""; document.getElementById("gif-q").value="";
+  updatePreview();
+}
+</script>
+</body>
+</html>
