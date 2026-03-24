@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Thank You, Tyler — Obama Foundation Staff</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+
+<!-- ═══════════════════════════════════════════════════════
+     CONFIG — paste your Apps Script URL here
+════════════════════════════════════════════════════════ -->
+<script>
+const CONFIG = {
+  SCRIPT_URL:     "https://script.google.com/macros/s/AKfycby_jzp0OLtiLETVPsZAa6c1UjOCbyoyIdFRsoyM2Y-aJ5qQgO8EZ9az0Q4HAY6dDHCr/exec",
+  RECIPIENT_NAME: "Obama Foundation Staff",
+  FROM_LINE:      "Cards from the 2025-2026 Leaders Asia-Pacific Cohort",
+  BOARD_LABEL:    "Obama Foundation Staff",
+};
+</script>
+<!-- ════════════════════════════════════════════════════════ -->
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cobalt:#0047AB;--cobalt-d:#003080;--cobalt-l:#1a5fc4;
+  --cobalt-xl:#e8eef8;--cobalt-xx:#f0f4fb;
+  --gold:#C9A84C;--gold-l:#e8c96a;
+  --ink:#111827;--ink2:#374151;--muted:#6B7280;
+  --paper:#f9fafb;--white:#ffffff;
+  --border:#E5E7EB;--radius:16px;
+  --shadow-card:0 2px 4px rgba(0,0,0,.04),0 12px 32px rgba(0,71,171,.07);
+  --shadow-h:0 4px 12px rgba(0,0,0,.08),0 20px 48px rgba(0,71,171,.12);
+}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased}
+
+.hero{position:relative;overflow:hidden;min-height:420px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:90px 24px 110px;background:linear-gradient(145deg,#001a4d 0%,#002d7a 40%,#003a9e 70%,#0047AB 100%)}
+.hero::before{content:'';position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:48px 48px}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:120px;pointer-events:none;background:linear-gradient(to bottom,transparent,rgba(201,168,76,.08))}
+.hero-glow{position:absolute;top:-60px;right:-60px;width:400px;height:400px;pointer-events:none;background:radial-gradient(circle,rgba(201,168,76,.18) 0%,transparent 70%)}
+.hero-glow2{position:absolute;bottom:-80px;left:-80px;width:360px;height:360px;pointer-events:none;background:radial-gradient(circle,rgba(255,255,255,.05) 0%,transparent 70%)}
+.hero-inner{position:relative;z-index:1;max-width:640px;animation:heroIn .8s cubic-bezier(.22,1,.36,1) both}
+@keyframes heroIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.hero-kicker{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(201,168,76,.85);margin-bottom:22px;border:1px solid rgba(201,168,76,.25);border-radius:30px;padding:5px 16px;background:rgba(201,168,76,.07)}
+.hero-board-label{display:inline-block;font-size:11px;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:12px}
+.hero-h1{font-family:'Fraunces',serif;font-size:clamp(40px,9vw,82px);font-weight:900;line-height:.94;letter-spacing:-2.5px;color:#fff;margin-bottom:22px}
+.hero-h1 em{font-style:italic;color:var(--gold-l);display:block;font-weight:700}
+.hero-sub{font-style:italic;font-size:clamp(14px,2vw,16px);color:rgba(255,255,255,.5);line-height:1.7;margin-bottom:32px}
+.hero-pill{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:40px;padding:10px 22px;font-size:13px;font-weight:600;color:rgba(255,255,255,.75);letter-spacing:.3px;backdrop-filter:blur(8px)}
+.hero-pill .pill-num{color:var(--gold-l);font-size:15px;font-weight:700}
+.hero-pill .dot{width:4px;height:4px;background:rgba(255,255,255,.3);border-radius:50%}
+
+.petals{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:1000}
+.petal{position:absolute;top:-20px;opacity:0;animation:petalFall linear both}
+@keyframes petalFall{0%{transform:translateY(0) rotate(0deg) scale(1);opacity:.9}100%{transform:translateY(110vh) rotate(540deg) scale(.4);opacity:0}}
+
+.scroll-hint{text-align:center;padding:16px 0 0;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);display:none}
+.board-wrap{max-width:1180px;margin:0 auto;padding:44px 20px 90px;display:none}
+.sec-label{display:flex;align-items:center;gap:14px;margin:36px 0 20px}
+.sec-label-text{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);white-space:nowrap;flex-shrink:0}
+.sec-label::before,.sec-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--border))}
+.featured{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
+.masonry{columns:3;column-gap:18px}
+@media(max-width:960px){.masonry{columns:2}}
+@media(max-width:560px){.masonry{columns:1}.featured{grid-template-columns:1fr}}
+
+.card{break-inside:avoid;background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:20px 20px 16px;margin-bottom:18px;box-shadow:var(--shadow-card);transition:box-shadow .25s,transform .2s;animation:cardIn .5s cubic-bezier(.22,1,.36,1) both;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--card-accent,var(--cobalt));border-radius:var(--radius) var(--radius) 0 0}
+.card::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(145deg,var(--card-tint,#f0f4fb) 0%,transparent 55%);opacity:.6;border-radius:var(--radius)}
+.card>*{position:relative;z-index:1}
+.featured .card{margin-bottom:0}
+.card:hover{box-shadow:var(--shadow-h);transform:translateY(-4px)}
+@keyframes cardIn{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.card-head{display:flex;align-items:center;gap:10px;margin-bottom:13px}
+.avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.card-from{font-size:13px;font-weight:700;color:var(--ink)}
+.card-time{font-size:11px;color:var(--muted);margin-top:1px}
+.card-emoji{font-size:30px;margin-bottom:9px;line-height:1}
+.card-body{font-size:13.5px;line-height:1.72;color:var(--ink2);white-space:pre-wrap;word-break:break-word}
+.card-body a{color:var(--cobalt);text-decoration:underline;word-break:break-all}
+.card-gif{margin-top:12px;border-radius:10px;overflow:hidden}
+.card-gif img{width:100%;display:block;max-height:200px;object-fit:cover}
+
+.skel-wrap{max-width:1180px;margin:44px auto 0;padding:0 20px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+@media(max-width:680px){.skel-wrap{grid-template-columns:1fr}}
+.skel{background:linear-gradient(90deg,#eef1f6 25%,#e4e8ef 50%,#eef1f6 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:var(--radius)}
+@keyframes shimmer{to{background-position:-200% 0}}
+.empty{text-align:center;padding:90px 24px;color:var(--muted)}
+.empty .big{font-size:56px;margin-bottom:16px}
+.brand-strip{text-align:center;padding:24px;border-top:1px solid var(--border);margin-top:16px}
+.brand-strip-inner{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.brand-strip-dot{width:6px;height:6px;border-radius:50%;background:var(--cobalt);opacity:.4}
+</style>
+</head>
+<body>
+<div class="petals" id="petals"></div>
+
+<div class="hero">
+  <div class="hero-glow"></div><div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="hero-board-label" id="hero-board-label"></div>
+    <div class="hero-kicker">✦ &nbsp; A gift from your people &nbsp; ✦</div>
+    <h1 class="hero-h1">Thank<br/>you,<br/><em id="hero-name"></em></h1>
+    <p class="hero-sub" id="hero-sub"></p>
+    <div class="hero-pill">
+      <span class="pill-num" id="hero-count">Loading…</span>
+      <span class="dot"></span>
+      <span>written just for you</span>
+    </div>
+  </div>
+</div>
+
+<p class="scroll-hint" id="scroll-hint">↓ &nbsp; scroll to see all cards &nbsp; ↓</p>
+<div class="skel-wrap" id="loading">
+  <div class="skel" style="height:200px"></div>
+  <div class="skel" style="height:165px"></div>
+  <div class="skel" style="height:230px"></div>
+</div>
+<div class="empty" id="empty" style="display:none"><div class="big">💌</div><p>No cards yet — check back soon!</p></div>
+<div class="board-wrap" id="board-wrap">
+  <div class="featured" id="featured"></div>
+  <div class="sec-label" id="all-label" style="display:none"><span class="sec-label-text">All cards</span></div>
+  <div class="masonry" id="masonry"></div>
+</div>
+<div class="brand-strip" id="brand-strip" style="display:none">
+  <div class="brand-strip-inner"><span class="brand-strip-dot"></span>Thank You Board<span class="brand-strip-dot"></span></div>
+</div>
+
+<script>
+const ACCENTS=[
+  {hex:"#0047AB",tint:"#f0f4fb",avBg:"#0047AB"},{hex:"#1a5fc4",tint:"#eef3fc",avBg:"#1a5fc4"},
+  {hex:"#C9A84C",tint:"#fdf9ee",avBg:"#b8902a"},{hex:"#16a34a",tint:"#f0fdf4",avBg:"#16a34a"},
+  {hex:"#7c3aed",tint:"#faf5ff",avBg:"#7c3aed"},{hex:"#db2777",tint:"#fdf2f8",avBg:"#db2777"},
+  {hex:"#0891b2",tint:"#ecfeff",avBg:"#0891b2"},{hex:"#d97706",tint:"#fffbeb",avBg:"#d97706"},
+];
+
+document.getElementById("hero-name").textContent=CONFIG.RECIPIENT_NAME;
+document.getElementById("hero-sub").textContent=CONFIG.FROM_LINE;
+document.getElementById("hero-board-label").textContent=CONFIG.BOARD_LABEL||"";
+
+const esc=s=>String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const linkify=t=>t.replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
+const initials=n=>n.trim().split(/\s+/).map(w=>w[0]).join("").toUpperCase().slice(0,2);
+const timeAgo=ts=>{const d=(Date.now()-ts)/1000;if(d<60)return"just now";if(d<3600)return`${Math.floor(d/60)}m ago`;if(d<86400)return`${Math.floor(d/3600)}h ago`;if(d<604800)return`${Math.floor(d/86400)}d ago`;return new Date(ts).toLocaleDateString();};
+
+function cardHtml(c,delay=0){
+  const a=ACCENTS[c.accentIdx]||ACCENTS[0];
+  return`<div class="card" style="--card-accent:${a.hex};--card-tint:${a.tint};animation-delay:${delay}s">
+  <div class="card-head"><div class="avatar" style="background:${a.avBg}">${initials(c.from)}</div><div><div class="card-from">${esc(c.from)}</div><div class="card-time">${timeAgo(c.ts)}</div></div></div>
+  ${c.emoji?`<div class="card-emoji">${c.emoji}</div>`:""}
+  <div class="card-body">${linkify(esc(c.msg))}</div>
+  ${c.gif?`<div class="card-gif"><img src="${esc(c.gif)}" alt="GIF" loading="lazy"/></div>`:""}
+</div>`;
+}
+
+function launchPetals(){
+  const wrap=document.getElementById("petals");
+  const colors=["#0047AB","#1a5fc4","#C9A84C","#e8c96a","#fff","#93c5fd","#fbbf24","#86efac"];
+  for(let i=0;i<60;i++){
+    const el=document.createElement("div");el.className="petal";
+    const size=5+Math.random()*11;
+    el.style.cssText=`left:${Math.random()*100}%;width:${size}px;height:${size}px;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${2.8+Math.random()*4.2}s;animation-delay:${Math.random()*2.4}s;border-radius:${Math.random()>.5?"50% 0 50% 0":"50%"};`;
+    wrap.appendChild(el);
+  }
+  setTimeout(()=>wrap.innerHTML="",8000);
+}
+
+async function load(){
+  try{
+    const r=await fetch(CONFIG.SCRIPT_URL+"?_="+Date.now());
+    const cards=await r.json();
+    cards.sort((a,b)=>b.ts-a.ts);
+    document.getElementById("loading").style.display="none";
+    if(!cards.length){document.getElementById("empty").style.display="block";document.getElementById("hero-count").textContent="0";return;}
+    const n=cards.length;
+    document.getElementById("hero-count").textContent=n;
+    if(n>3)document.getElementById("scroll-hint").style.display="block";
+    const feat=cards.slice(0,Math.min(3,n)),rest=cards.slice(Math.min(3,n));
+    document.getElementById("featured").innerHTML=feat.map((c,i)=>cardHtml(c,i*0.1)).join("");
+    if(rest.length){document.getElementById("all-label").style.display="flex";document.getElementById("masonry").innerHTML=rest.map((c,i)=>cardHtml(c,0.3+i*0.05)).join("");}
+    document.getElementById("board-wrap").style.display="block";
+    document.getElementById("brand-strip").style.display="block";
+    launchPetals();
+  }catch{
+    document.getElementById("loading").style.display="none";
+    document.getElementById("empty").style.display="block";
+    document.getElementById("hero-count").textContent="0";
+  }
+}
+load();
+</script>
+</body>
+</html>
